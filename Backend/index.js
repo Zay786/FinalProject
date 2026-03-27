@@ -16,64 +16,58 @@ const knex = require("knex")({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
+    ssl: { rejectUnauthorized: false }  // ⚡ add this for Neon
   },
+  searchPath: ['public'],
 });
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../dist")));
 
-knex.select('user_id', 'username', 'password_hash', 'email')
-    .from('logistics_users')
-    .then((data) =>
-    console.log("Database connected:", data.length, "users found")
-  )
-  .catch((err) => console.error("Database error:", err.message));
+// Test DB connection
+knex.raw("SELECT 1")
+  .then(() => console.log("DB connected ✅"))
+  .catch(err => console.error("DB error ❌", err.message));
 
 // ==========================
-// LOGIN ENDPOINT
+// LOGIN
 // ==========================
 app.post("/api/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    if (!username || !password) {
-      return res.status(400).json({ error: "Username and password are required" });
-    }
 
-    const user = await knex("logistics_users").where("username", username).first();
-    if (!user) {
-      return res.status(401).json({ error: "Invalid username" });
-    }
+    const user = await knex("logistics_users")
+      .where("username", username)
+      .first();
 
-    const isPasswordValid = await bcrypt.compare(password, user.password_hash);
-    if (!isPasswordValid) {
-      return res.status(401).json({ error: "Invalid password" });
-    }
+    if (!user) return res.status(401).json({ error: "Invalid username" });
 
-    res.status(200).json({ message: "Login successful", userId: user.user_id })  ;
-    } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    const valid = await bcrypt.compare(password, user.password_hash);
+    if (!valid) return res.status(401).json({ error: "Invalid password" });
+
+    res.json({ message: "Login successful", userId: user.user_id });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
-
 // ==========================
-// QUOTATION ENDPOINT
+// QUOTATION
 // ==========================
 app.post("/api/quotation", async (req, res) => {
   try {
     const data = req.body;
 
-    console.log("Incoming request:", data);
-
-    // Call Python ML service
-    const response = await axios.post("http://127.0.0.1:8001/generate", data);
+    const response = await axios.post(
+      process.env.ML_API_URL + "/generate",
+      data
+    );
 
     const { price, pdf_url } = response.data;
 
-    // Save to PostgreSQL
     await knex("quotations").insert({
       customer_name: data.name,
       company_name: data.company,
@@ -86,23 +80,13 @@ app.post("/api/quotation", async (req, res) => {
       predicted_price: price
     });
 
-    res.json({
-      success: true,
-      price,
-      pdf_url
-    });
+    res.json({ success: true, price, pdf_url });
 
   } catch (error) {
-    console.error("FULL ERROR:", error.message);
-
-    if (error.response) {
-      console.error("Python API error:", error.response.data);
-    }
-
-    res.status(500).json({
-      error: "Quotation generation failed"
-    });
+    console.error(error.message);
+    res.status(500).json({ error: "Quotation failed" });
   }
 });
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
