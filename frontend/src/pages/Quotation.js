@@ -2,6 +2,24 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./Quotation.css";
+import { buildApiUrl } from "../services/api";
+
+const openPdfFromBase64 = (base64, fileName = "quotation.pdf") => {
+  const binary = window.atob(base64);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  const blob = new Blob([bytes], { type: "application/pdf" });
+  const fileUrl = window.URL.createObjectURL(blob);
+  const newTab = window.open(fileUrl, "_blank", "noopener,noreferrer");
+
+  if (!newTab) {
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = fileName;
+    link.click();
+  }
+
+  window.setTimeout(() => window.URL.revokeObjectURL(fileUrl), 60000);
+};
 
 const Quotation = () => {
   const [message, setMessage] = useState("");
@@ -24,7 +42,7 @@ const Quotation = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/quotation", {
+      const res = await fetch(buildApiUrl("/api/quotation"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,14 +56,17 @@ const Quotation = () => {
 
       setMessage(`✅ Estimated Price: $${data.price}`);
 
-      // Open PDF in new tab
-      if (data.pdf_url) {
+      setMessage(`Estimated Price: $${data.price}`);
+      if (data.pdf_base64) {
+        openPdfFromBase64(data.pdf_base64, data.pdf_file_name);
+      } else if (data.pdf_url) {
         window.open(data.pdf_url, "_blank");
       }
 
     } catch (err) {
       console.error(err);
       setMessage("❌ Error generating quotation");
+      setMessage("Error generating quotation");
     } finally {
       setLoading(false);
     }
