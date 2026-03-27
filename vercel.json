@@ -2,6 +2,13 @@
   "version": 2,
   "builds": [
     {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
       "src": "Backend/vercel.js",
       "use": "@vercel/node"
     },
@@ -10,21 +17,21 @@
       "use": "@vercel/python"
     }
   ],
-  "installCommand": "npm install --prefix frontend && npm install --prefix Backend",
-  "buildCommand": "npm run build --prefix frontend",
-  "outputDirectory": "frontend/build",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/ml/:path*",
-      "destination": "/ml-service/api/vercel_quotation_api.py"
+      "src": "/api/ml/(.*)",
+      "dest": "ml-service/api/vercel_quotation_api.py"
     },
     {
-      "source": "/api/:path*",
-      "destination": "/Backend/vercel.js"
+      "src": "/api/(.*)",
+      "dest": "Backend/vercel.js"
     },
     {
-      "source": "/:path*",
-      "destination": "/index.html"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
