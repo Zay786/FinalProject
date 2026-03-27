@@ -1,0 +1,97 @@
+.services-container {
+.services-title {
+font-size: 36px;
+font-weight: 700;
+margin-bottom: 40px;
+}
+
+.services-title {
+    color: darkblue;
+    font-size: 36px;
+    font-weight: 700;
+
+    /* Push title downward from navbar */
+    margin-top: 120px;
+
+    /* Push it slightly from the left */
+    margin-left: 40px;
+
+    /* Align text to the left */
+    text-align: center;
+}
+
+
+.service-cards-wrapper {
+display: flex;
+justify-content: center;
+gap: 25px;
+flex-wrap: wrap;
+margin-bottom: 25px;
+}
+
+
+.service-card {
+    width: 350px;          /* Bigger box */
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;         /* More space inside */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: 0.10s ease;
+}
+
+
+.service-card img {
+    width: 100%;
+    height: 300px;       /* Bigger image */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.service-card:hover {
+transform: translateY(-6px);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+}
+
+
+.service-card h3 {
+margin-top: 15px;
+font-size: 20px;
+font-weight: 600;
+}
+
+
+.service-card p {
+margin-top: 8px;
+font-size: 14px;
+color: #555;
+}
+
+.service-cards-wrapper {
+  transition: opacity 0.10s ease-in-out;
+}
+
+/* Pagination */
+.pagination-dots {
+display: flex;
+justify-content: center;
+gap: 10px;
+margin-top: 10px;
+padding-bottom: 30px;
+}
+
+
+.dot {
+width: 12px;
+height: 12px;
+background-color: #bbb;
+border-radius: 50%;
+cursor: pointer;
+transition: 0.3s;
+}
+
+
+.dot.active {
+width: 14px;
+height: 14px;
+background-color: #007bff;
+}}

@@ -1,0 +1,73 @@
+.quotation-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* MAIN FORM CONTAINER */
+.quotation-container {
+  max-width: 800px;
+  margin: 80px auto 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* HEADING */
+.quotation-container h1 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+/* FORM ELEMENTS */
+.quotation-container input,
+.quotation-container select,
+.quotation-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.quotation-container textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* SUBMIT BUTTON */
+.quotation-container button {
+  background: #3b82f6;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.quotation-container button:hover {
+  background: #2563eb;
+}
+
+/* SUCCESS MESSAGE */
+.success-message {
+  text-align: center;
+  color: green;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .quotation-container {
+    margin: 60px 20px 40px 20px;
+    padding: 25px;
+  }
+}

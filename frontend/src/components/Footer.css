@@ -1,0 +1,41 @@
+/* GLOBAL BOX-SIZING */
+* {
+  box-sizing: border-box;
+}
+
+/* FOOTER STYLES */
+.footer {
+  width: 100%;
+  background: #0F2448; /* dark blue, same tone as navbar */
+  color: white;
+  padding: 1.5vh 4vw; /* responsive vertical and horizontal padding */
+  min-height: 50px;  
+  text-align: center;
+  font-size: 14px;
+  position: fixed; 
+  bottom: 0;
+  left: 0; /* ensures it starts from left edge */
+  z-index: 9999;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+  
+  display: flex;           /* centers content vertically */
+  justify-content: center; /* centers horizontally */
+  align-items: center;     /* centers vertically */
+}
+
+/* MOBILE / TABLET RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 2vh 3vw;  /* slightly smaller on small screens */
+    font-size: 13px;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.5vh 2vw;
+    font-size: 12px;
+  }
+}
+

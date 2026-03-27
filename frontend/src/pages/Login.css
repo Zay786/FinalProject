@@ -1,0 +1,194 @@
+/* PAGE BACKGROUND */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* BACKGROUND IMAGE */
+.login-background {
+  position: absolute;
+  top: 60px; /* below navbar */
+  left: 0;
+  right: 0;
+  background: url("https://tse2.mm.bing.net/th/id/OIP.wTuHMvA76sGh5mNp9ueZeQHaEK?rs=1&pid=ImgDetMain&o=7&rm=3") no-repeat center center/cover;
+  bottom: 60px; /* above footer */
+  z-index: 0;
+}
+
+/* DARK OVERLAY */
+.login-overlay {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  z-index: 1;
+}
+
+/* CARD WRAPPER */
+.login-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 70px;
+  position: relative;
+  z-index: 2;
+}
+
+/* LOGIN CARD */
+.login-card {
+  display: flex;
+  width: 900px;
+  max-width: 95%;
+  height: 500px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+/* LEFT SIDE */
+.login-left {
+  flex: 1;
+  background-color: rgba(224,240,255,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center; 
+}
+
+.login-left h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #003366;
+}
+
+.login-left h3 {
+  color: #0077cc;
+  font-weight: normal;
+}
+
+.rotating-icon {
+  width: 140px;
+  height: 100px;
+  margin: 15px 0;
+  transition: opacity 0.5s;
+}
+
+.login-left p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0077cc;
+  margin-top: 15px;
+}
+
+/* RIGHT SIDE */
+.login-right {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-right h2, .login-right h3 {
+  text-align: center;
+}
+
+.login-right form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.login-right input {
+  width: 80%;
+  max-width: 300px;
+  padding: 14px;
+  margin: 10px 0;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.login-right button {
+  width: 80%;
+  max-width: 300px;
+  padding: 14px;
+  margin-top: 10px;
+  font-size: 16px;
+  background: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.login-right button:hover {
+  background: #005fa3;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+
+  /* CARD */
+  .login-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* LEFT SIDE — make it compact */
+  .login-left {
+    padding: 20px 15px;
+    justify-content: flex-start;   /* ⬅️ stop vertical centering */
+  }
+
+  .login-left h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .login-left h3 {
+    font-size: 15px;
+  }
+
+  .login-left p {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .rotating-icon {
+    width: 90px;      /* ⬅️ smaller icon */
+    height: auto;
+    margin: 10px 0;
+  }
+
+  /* RIGHT SIDE — tighter form */
+  .login-right {
+    padding: 25px 20px;
+    justify-content: flex-start;
+  }
+
+  .login-right input,
+  .login-right button {
+    width: 100%;
+    max-width: 280px;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* WRAPPER — reduce vertical space */
+  .login-wrapper {
+    padding: 30px 15px 20px;
+  }
+}
+

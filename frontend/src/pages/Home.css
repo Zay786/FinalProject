@@ -1,0 +1,136 @@
+/* HERO WRAPPER (Adjusted Height to Fit One Page) */
+.hero-wrapper {
+  position: relative;
+  height: 70vh; /* reduced height so Stats + Footer fit without scrolling */
+  width: 100%;
+  overflow: hidden;
+  margin-top: 60px; /* Navbar offset */
+}
+
+/* VIDEO: remove opacity, remove blur */
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -10;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* LEFT FULL HEIGHT BOX LIKE THE IMAGE */
+.hero-left-full {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 40%; /* takes left vertical space */
+  background: rgba(17, 42, 69, 0.7);
+  padding: 60px 50px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* center the text vertically */
+  z-index: 5;
+}
+
+.hero-left-full h1 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-left-full p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 10px 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  transition: 0.3s;
+  color: #fff;
+}
+
+.btn-primary {
+  background: #3b82f6;
+}
+
+.btn-primary:hover {
+  background: darkblue;
+}
+
+.btn-secondary {
+  background: #4f8cff;
+}
+
+.btn-secondary:hover {
+  background: darkblue;
+}
+
+/* STATS SECTION */
+.stats-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 5%;
+  background: #0d1b2a;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  text-align: center;
+  width: 200px;
+  color: white;
+}
+
+.stat-box i {
+  font-size: 40px;
+  margin-bottom: 15px;
+  color: white;   
+}
+
+.stat-box h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.stat-box p {
+  font-size: 14px;
+  opacity: 0.8;
+  color: white;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero-left-full {
+    width: 100%;
+    height: auto;
+    padding: 30px 25px;
+    position: relative;
+    text-align: center;       /* centers text */
+    align-items: center;      /* centers flex items */
+  }
+
+  .stats-section {
+    flex-direction: column;
+    gap: 25px;
+     text-align: center;       /* centers text */
+    align-items: center;      /* centers flex items */
+  }
+}
