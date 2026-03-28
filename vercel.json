@@ -9,7 +9,7 @@
       }
     },
     {
-      "src": "Backend/vercel.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "src": "/api/(.*)",
-      "dest": "Backend/vercel.js"
+      "dest": "api/index.js"
     },
     {
       "handle": "filesystem"

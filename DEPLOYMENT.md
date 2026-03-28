@@ -3,7 +3,7 @@
 This repository can be deployed to one Vercel project without changing the folder structure:
 
 - `frontend/` builds the React app
-- `Backend/vercel.js` serves the Node.js API on `/api/*`
+- `api/index.js` serves the Node.js API on `/api/*`
 - `ml-service/api/vercel_quotation_api.py` serves the Python quotation endpoint on `/api/ml/*`
 
 ## Environment variables

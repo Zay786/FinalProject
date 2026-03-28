@@ -56,20 +56,25 @@ const getMlApiBaseUrl = (req) => {
 // ==========================
 const app = express();
 
+const registerApiRoute = (method, path, handler) => {
+  app[method](path, handler);
+  app[method](`/api${path}`, handler);
+};
+
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // ==========================
 // HEALTH CHECK
 // ==========================
-app.get("/api/health", (_req, res) => {
+registerApiRoute("get", "/health", (_req, res) => {
   res.json({ ok: true });
 });
 
 // ==========================
 // LOGIN ENDPOINT
 // ==========================
-app.post("/api/login", async (req, res) => {
+registerApiRoute("post", "/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -103,7 +108,7 @@ app.post("/api/login", async (req, res) => {
 // ==========================
 // QUOTATION ENDPOINT
 // ==========================
-app.post("/api/quotation", async (req, res) => {
+registerApiRoute("post", "/quotation", async (req, res) => {
   try {
     const data = req.body;
 
